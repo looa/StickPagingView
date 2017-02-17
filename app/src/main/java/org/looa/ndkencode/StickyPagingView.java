@@ -176,12 +176,21 @@ public class StickyPagingView extends LinearLayout implements Animator.AnimatorL
     @Override
     public void onAnimationStart(Animator animation) {
         isFinishAnim = false;
+        if (page1.getParent() == null) {
+            attachViewToParent(page1, 0, page1.getLayoutParams());
+        }
     }
+
+    private boolean isChanged = false;
 
     @Override
     public void onAnimationEnd(Animator animation) {
         isFinishAnim = true;
         resetPagePosition();
+        if (!isChanged && page1.getParent() != null) {
+            detachViewFromParent(page1);
+            isChanged = true;
+        }
     }
 
     @Override
