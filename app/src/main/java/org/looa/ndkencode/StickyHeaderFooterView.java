@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 import com.liaoinstan.springview.container.BaseHeader;
 
 /**
+ * 上拉或者下拉头
+ * <p>
  * Created by ranxiangwei on 2017/2/16.
  */
 
-public class StickySideView extends BaseHeader {
+public class StickyHeaderFooterView extends BaseHeader {
 
     private OnReachLimitListener listener;
 
@@ -19,7 +21,7 @@ public class StickySideView extends BaseHeader {
 
     private int type;
 
-    public StickySideView(int type) {
+    public StickyHeaderFooterView(int type) {
         this.type = type;
     }
 
@@ -27,7 +29,8 @@ public class StickySideView extends BaseHeader {
     public View getView(LayoutInflater inflater, ViewGroup viewGroup) {
         View view = null;
         if (type == HEADER) view = inflater.inflate(R.layout.sticky_paging_header, viewGroup, true);
-        else if (type == FOOTER) view = inflater.inflate(R.layout.sticky_paging_footer, viewGroup, true);
+        else if (type == FOOTER)
+            view = inflater.inflate(R.layout.sticky_paging_footer, viewGroup, true);
         return view;
     }
 
@@ -59,5 +62,8 @@ public class StickySideView extends BaseHeader {
 
     }
 
-
+    @Override
+    public int getDragLimitHeight(View rootView) {
+        return (int) rootView.getResources().getDimension(R.dimen.my_header_height);
+    }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/tv_footer_content"
@@ -10,15 +10,6 @@
         android:layout_centerHorizontal="true"
         android:lines="1"
         android:padding="12dp"
-        android:text="释放查看更多内容" />
+        android:text="" />
 
-
-    <ImageView
-        android:id="@+id/iv_footer_row"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_below="@id/tv_footer_content"
-        android:layout_centerHorizontal="true"
-        android:scaleType="centerInside"
-        android:src="@drawable/icon_drop" />
 </RelativeLayout>

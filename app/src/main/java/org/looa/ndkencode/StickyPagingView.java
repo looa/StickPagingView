@@ -33,11 +33,7 @@ public class StickyPagingView extends LinearLayout implements Animator.AnimatorL
     private View page2;
     private SpringView svInfo;//商品的信息页
     private SpringView svDetail;//商品的web详情页
-    private TabView tabView;
     private WebView webView;
-
-    private StickySideView infoHeader, detailHeader;
-    private StickySideView infoFooter, detailFooter;
 
     private boolean isFinishAnim = true;
     private int viewHeight;
@@ -66,7 +62,7 @@ public class StickyPagingView extends LinearLayout implements Animator.AnimatorL
         page1 = layoutInflater.inflate(R.layout.sticky_paging_info, null);
         page2 = layoutInflater.inflate(R.layout.sticky_paging_detail, null);
 
-        tabView = (TabView) page2.findViewById(R.id.tab_detail);
+        TabView tabView = (TabView) page2.findViewById(R.id.tab_detail);
         tabView.setAutoFillParent(true);
         tabView.setSmooth(true);
         tabView.setBashLineColor(Color.LTGRAY);
@@ -79,11 +75,11 @@ public class StickyPagingView extends LinearLayout implements Animator.AnimatorL
 
         webView = (WebView) page2.findViewById(R.id.wv_detail);
 
-        infoHeader = new StickySideView(StickySideView.HEADER);
-        infoFooter = new StickySideView(StickySideView.FOOTER);
+        StickyEmptyHeaderFooterView infoHeader = new StickyEmptyHeaderFooterView();
+        StickyHeaderFooterView infoFooter = new StickyHeaderFooterView(StickyHeaderFooterView.FOOTER);
 
-        detailHeader = new StickySideView(StickySideView.HEADER);
-        detailFooter = new StickySideView(StickySideView.FOOTER);
+        StickyHeaderFooterView detailHeader = new StickyHeaderFooterView(StickyHeaderFooterView.HEADER);
+        StickyEmptyHeaderFooterView detailFooter = new StickyEmptyHeaderFooterView();
 
         svInfo = (SpringView) page1.findViewById(R.id.sv_info);
         svDetail = (SpringView) page2.findViewById(R.id.sv_detail);
@@ -176,21 +172,12 @@ public class StickyPagingView extends LinearLayout implements Animator.AnimatorL
     @Override
     public void onAnimationStart(Animator animation) {
         isFinishAnim = false;
-        if (page1.getParent() == null) {
-            attachViewToParent(page1, 0, page1.getLayoutParams());
-        }
     }
-
-    private boolean isChanged = false;
 
     @Override
     public void onAnimationEnd(Animator animation) {
         isFinishAnim = true;
         resetPagePosition();
-        if (!isChanged && page1.getParent() != null) {
-            detachViewFromParent(page1);
-            isChanged = true;
-        }
     }
 
     @Override
