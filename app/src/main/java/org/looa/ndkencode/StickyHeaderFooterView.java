@@ -21,16 +21,23 @@ public class StickyHeaderFooterView extends BaseHeader {
 
     private int type;
 
-    public StickyHeaderFooterView(int type) {
-        this.type = type;
+    /**
+     * 设置Header、footer类型
+     *
+     * @param resID R.layout.xxx
+     */
+    public StickyHeaderFooterView(int resID) {
+        this.type = resID;
     }
 
     @Override
     public View getView(LayoutInflater inflater, ViewGroup viewGroup) {
-        View view = null;
+        View view;
         if (type == HEADER) view = inflater.inflate(R.layout.sticky_paging_header, viewGroup, true);
         else if (type == FOOTER)
             view = inflater.inflate(R.layout.sticky_paging_footer, viewGroup, true);
+        else
+            view = inflater.inflate(type, viewGroup, true);
         return view;
     }
 
@@ -65,5 +72,10 @@ public class StickyHeaderFooterView extends BaseHeader {
     @Override
     public int getDragLimitHeight(View rootView) {
         return (int) rootView.getResources().getDimension(R.dimen.my_header_height);
+    }
+
+    @Override
+    public int getDragSpringHeight(View rootView) {
+        return 1;
     }
 }

@@ -7,7 +7,7 @@
     android:background="#a0acacac"
     tools:context="org.looa.ndkencode.MainActivity">
 
-    <org.looa.ndkencode.StickyPagingView
+    <org.looa.ndkencode.StickyListPageView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </RelativeLayout>
